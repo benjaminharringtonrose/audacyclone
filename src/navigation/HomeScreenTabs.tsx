@@ -44,6 +44,16 @@ export function HomeScreenTabs() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
+          title: '',
+          headerLeft: () => {
+            return (
+              <Image
+                resizeMode={'contain'}
+                source={require('../../assets/audacy-icon.jpg')}
+                style={{ width: 35, height: 35, marginLeft: 10 }}
+              />
+            );
+          },
           tabBarLabel: 'Home',
           tabBarInactiveTintColor: 'grey',
           tabBarActiveTintColor: 'white',

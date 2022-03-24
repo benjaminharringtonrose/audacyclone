@@ -1,25 +1,16 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigation } from '@react-navigation/native';
+import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Image, SectionList, StyleSheet, Text, View } from 'react-native';
 import { CircleList, RectangleCell, SquareList } from '../components';
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import { colors } from '../constants';
-
-enum SectionListType {
-  explore = 'explore',
-  newSeries = 'newSeries',
-  newPodcasts = 'newPodcasts',
-  bingeEpisodes = 'bingeEpisodes',
-}
-
-interface SectionListData {
-  id: string;
-  type: SectionListType;
-}
+import { PodcastsSectionListData, PodcastsSectionListType } from '../types';
+import {
+  colors,
+  EXPLORE_PODCASTS_DATA,
+  NEW_PODCASTS_DATA,
+  PODCASTS_SECTIONLIST_DATA,
+} from '../constants';
 
 export const PodcastsScreen = () => {
   const navigation = useNavigation();
@@ -36,52 +27,57 @@ export const PodcastsScreen = () => {
             size={24}
             color={colors.white}
             style={{ marginRight: 10 }}
+            onPress={() => {}}
           />
         );
       },
     });
   }, []);
 
+  const renderHeader = () => {
+    return (
+      <SegmentedControl
+        values={['DISCOVER', 'SUBSCRIPTIONS']}
+        selectedIndex={selectedIndex}
+        onChange={event => {
+          setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
+        }}
+        style={{ backgroundColor: colors.secondary }}
+        activeFontStyle={{ color: colors.white }}
+        fontStyle={{ color: colors.white }}
+        tintColor={colors.accent}
+      />
+    );
+  };
+
+  const renderItem = ({ item }: { item: PodcastsSectionListData }) => {
+    switch (item.type) {
+      case PodcastsSectionListType.explore:
+        return <CircleList data={EXPLORE_PODCASTS_DATA} />;
+      case PodcastsSectionListType.newSeries:
+        return <RectangleCell label={''} />;
+      case PodcastsSectionListType.newPodcasts:
+        return <SquareList data={NEW_PODCASTS_DATA} />;
+      case PodcastsSectionListType.bingeEpisodes:
+        return <RectangleCell label={''} />;
+      default:
+        return <View />;
+    }
+  };
+
   return (
     <View style={styles.rootContainer}>
       {selectedIndex === 0 ? (
         <SectionList
-          sections={SECTIONLIST_DATA}
+          sections={PODCASTS_SECTIONLIST_DATA}
           keyExtractor={(item, index) => item.id + index}
-          ListHeaderComponent={() => {
-            return (
-              <SegmentedControl
-                values={['DISCOVER', 'SUBSCRIPTIONS']}
-                selectedIndex={selectedIndex}
-                onChange={event => {
-                  setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
-                }}
-                style={{ backgroundColor: colors.secondary }}
-                activeFontStyle={{ color: colors.white }}
-                fontStyle={{ color: colors.white }}
-                tintColor={colors.accent}
-              />
-            );
-          }}
+          ListHeaderComponent={renderHeader}
           renderSectionHeader={({ section: { title } }) => (
             <Text style={styles.header}>{title}</Text>
           )}
           showsVerticalScrollIndicator={false}
           stickySectionHeadersEnabled={false}
-          renderItem={({ item }: { item: SectionListData }) => {
-            switch (item.type) {
-              case SectionListType.explore:
-                return <CircleList data={EXPLORE_PODCASTS_DATA} />;
-              case SectionListType.newSeries:
-                return <RectangleCell label={''} />;
-              case SectionListType.newPodcasts:
-                return <SquareList data={NEW_PODCASTS_DATA} />;
-              case SectionListType.bingeEpisodes:
-                return <RectangleCell label={''} />;
-              default:
-                return <View />;
-            }
-          }}
+          renderItem={renderItem}
         />
       ) : (
         <View style={{ flex: 1 }}>
@@ -96,28 +92,16 @@ export const PodcastsScreen = () => {
             fontStyle={{ color: colors.white }}
             tintColor={colors.accent}
           />
-          <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={styles.noSubscribersBody}>
             <Image
               source={require('../../assets/podcast-button.jpg')}
               resizeMode={'contain'}
-              style={{ width: 150, height: 150, borderRadius: 40 }}
+              style={styles.podcastButton}
             />
-            <Text
-              style={{
-                color: colors.white,
-                fontWeight: '700',
-                fontSize: 15,
-                marginVertical: 20,
-              }}>
+            <Text style={styles.noSubscribersTitle}>
               {'No Subscribed Podcasts'}
             </Text>
-            <Text
-              style={{
-                color: colors.white,
-                textAlign: 'center',
-                marginHorizontal: 60,
-              }}>
+            <Text style={styles.noSubscribersDescription}>
               {
                 "Looks like you haven't subscribed to a podcast yet! Tap the subscribe button to add to your 'My Subscription' list."
               }
@@ -144,58 +128,25 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
   },
+  noSubscribersBody: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  podcastButton: {
+    width: 150,
+    height: 150,
+    borderRadius: 40,
+  },
+  noSubscribersTitle: {
+    color: colors.white,
+    fontWeight: '700',
+    fontSize: 15,
+    marginVertical: 20,
+  },
+  noSubscribersDescription: {
+    color: colors.white,
+    textAlign: 'center',
+    marginHorizontal: 60,
+  },
 });
-
-const SECTIONLIST_DATA = [
-  {
-    title: 'Explore Podcasts',
-    data: [
-      {
-        id: '0',
-        type: SectionListType.explore,
-      },
-    ],
-  },
-  {
-    title: 'New Series from NPR',
-    data: [
-      {
-        id: '1',
-        type: SectionListType.newSeries,
-      },
-    ],
-  },
-  {
-    title: 'New Podcasts on Audacy',
-    data: [
-      {
-        id: '2',
-        type: SectionListType.newPodcasts,
-      },
-    ],
-  },
-  {
-    title: 'Binge All Episodes Now',
-    data: [
-      {
-        id: '1',
-        type: SectionListType.newSeries,
-      },
-    ],
-  },
-];
-
-const EXPLORE_PODCASTS_DATA = [
-  { id: '0', title: 'Art' },
-  { id: '1', title: 'Business' },
-  { id: '2', title: 'Comedy' },
-  { id: '3', title: 'Education' },
-  { id: '4', title: 'Entertainment' },
-];
-
-const NEW_PODCASTS_DATA = [
-  { id: '0', title: 'Ultimate College', subtitle: 'Basketball...' },
-  { id: '1', title: 'HBO Docs Club', subtitle: '' },
-  { id: '2', title: 'Very Scary People', subtitle: '' },
-  { id: '3', title: 'Best Friends Back, Alright!', subtitle: '' },
-];

@@ -4,8 +4,9 @@ import { Image } from 'react-native';
 import { colors } from '../constants';
 import { PlayerScreen } from '../screens';
 import { HomeScreenTabs } from './HomeScreenTabs';
+import { MainStackParamList } from './types';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<MainStackParamList>();
 
 export function MainStack() {
   return (

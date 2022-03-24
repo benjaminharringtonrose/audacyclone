@@ -1,26 +1,11 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 import { RectangleCell, SearchBar } from '../components';
 import { RootContainer } from '../components/RootContainer';
-import { colors } from '../constants';
-
-enum SectionListType {
-  exclusiveMusicStations = 'exclusiveMusicStations',
-  musicThatMoves = 'musicThatMoves',
-  sportsForEveryFan = 'SportsForEveryFan',
-  theNewsYouNeed = 'theNewsYouNeed',
-  yourPassionsOurPodcasts = 'yourPassionsOurPodcasts',
-}
-
-interface SectionListData {
-  id: string;
-  type: SectionListType;
-}
+import { colors, EXPLORE_SECTIONLIST_DATA } from '../constants';
+import { ExploreSectionListData, ExploreSectionListType } from '../types';
 
 export const ExploreScreen = () => {
   const navigation = useNavigation();
@@ -50,24 +35,24 @@ export const ExploreScreen = () => {
         />
         <View style={{ paddingHorizontal: 20 }}>
           <SectionList
-            sections={SECTIONLIST_DATA}
+            sections={EXPLORE_SECTIONLIST_DATA}
             keyExtractor={(item, index) => item.id + index}
             renderSectionHeader={({ section: { title } }) => (
               <Text style={styles.header}>{title}</Text>
             )}
             showsVerticalScrollIndicator={false}
             stickySectionHeadersEnabled={false}
-            renderItem={({ item }: { item: SectionListData }) => {
+            renderItem={({ item }: { item: ExploreSectionListData }) => {
               switch (item.type) {
-                case SectionListType.exclusiveMusicStations:
+                case ExploreSectionListType.exclusiveMusicStations:
                   return <RectangleCell label={'Exclusive Stations'} />;
-                case SectionListType.musicThatMoves:
+                case ExploreSectionListType.musicThatMoves:
                   return <RectangleCell label={'MUSIC'} />;
-                case SectionListType.sportsForEveryFan:
+                case ExploreSectionListType.sportsForEveryFan:
                   return <RectangleCell label={'SPORTS'} />;
-                case SectionListType.theNewsYouNeed:
+                case ExploreSectionListType.theNewsYouNeed:
                   return <RectangleCell label={'NEWS'} />;
-                case SectionListType.yourPassionsOurPodcasts:
+                case ExploreSectionListType.yourPassionsOurPodcasts:
                   return <RectangleCell label={'PODCASTSs'} />;
                 default:
                   return <View />;
@@ -94,51 +79,3 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 });
-
-const SECTIONLIST_DATA = [
-  {
-    title: 'Exclusive Music Stations',
-    data: [
-      {
-        id: '0',
-        type: SectionListType.exclusiveMusicStations,
-      },
-    ],
-  },
-  {
-    title: 'Music That Moves',
-    data: [
-      {
-        id: '1',
-        type: SectionListType.musicThatMoves,
-      },
-    ],
-  },
-  {
-    title: 'Sports for Every Fan',
-    data: [
-      {
-        id: '2',
-        type: SectionListType.sportsForEveryFan,
-      },
-    ],
-  },
-  {
-    title: 'The News You Need',
-    data: [
-      {
-        id: '3',
-        type: SectionListType.theNewsYouNeed,
-      },
-    ],
-  },
-  {
-    title: 'Your Passions Our Podcasts',
-    data: [
-      {
-        id: '4',
-        type: SectionListType.yourPassionsOurPodcasts,
-      },
-    ],
-  },
-];

@@ -21,28 +21,14 @@ export const Setting = ({
   if (type === 'button') {
     return (
       <TouchableOpacity
-        style={{
-          flexDirection: 'row',
-          height: 50,
-          alignItems: 'center',
-          borderTopColor: noTopBorder ? undefined : colors.secondary,
-          borderBottomColor: colors.secondary,
-          borderWidth: StyleSheet.hairlineWidth,
-        }}
+        style={[
+          styles.buttonContainer,
+          { borderTopColor: noTopBorder ? undefined : colors.secondary },
+        ]}
         onPress={() => onPress()}>
-        <Text
-          style={{
-            flex: 1,
-            color: colors.white,
-            fontWeight: '700',
-            fontSize: 15,
-          }}>
-          {title}
-        </Text>
+        <Text style={styles.buttonTitle}>{title}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ marginRight: 10, color: colors.white, fontSize: 13 }}>
-            {value}
-          </Text>
+          <Text style={styles.buttonValue}>{value}</Text>
           <AntDesign name={'right'} color={colors.white} size={20} />
         </View>
       </TouchableOpacity>
@@ -50,16 +36,11 @@ export const Setting = ({
   } else if (type === 'switch' && typeof value === 'boolean') {
     return (
       <View
-        style={{
-          flexDirection: 'row',
-          height: 50,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderTopColor: noTopBorder ? undefined : colors.secondary,
-          borderBottomColor: colors.secondary,
-          borderWidth: StyleSheet.hairlineWidth,
-        }}>
-        <Text style={{ color: colors.white, fontWeight: '700' }}>{title}</Text>
+        style={[
+          styles.switchContainer,
+          { borderTopColor: noTopBorder ? undefined : colors.secondary },
+        ]}>
+        <Text style={styles.switchTitle}>{title}</Text>
         <Switch
           value={value}
           onValueChange={value => onPress(value)}
@@ -73,3 +54,36 @@ export const Setting = ({
     return null;
   }
 };
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    height: 50,
+    alignItems: 'center',
+    borderBottomColor: colors.secondary,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomColor: colors.secondary,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  buttonTitle: {
+    flex: 1,
+    color: colors.white,
+    fontWeight: '700',
+    fontSize: 15,
+  },
+  switchTitle: {
+    color: colors.white,
+    fontWeight: '700',
+  },
+  buttonValue: {
+    marginRight: 10,
+    color: colors.white,
+    fontSize: 13,
+  },
+});
