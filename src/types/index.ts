@@ -23,7 +23,7 @@ export interface ExploreSectionListData {
   type: ExploreSectionListType;
 }
 
-export enum HomeSectionListType {
+export enum HomeListType {
   discover = 'discover',
   stations = 'stations',
   music = 'music',
@@ -31,9 +31,10 @@ export enum HomeSectionListType {
   sportsPodcasts = 'sportsPodcasts',
 }
 
-export interface HomeSectionListData {
+export interface HomeData {
   id: string;
-  type: HomeSectionListType;
+  title: string;
+  type: HomeListType;
 }
 
 export interface SectionListMetaData {

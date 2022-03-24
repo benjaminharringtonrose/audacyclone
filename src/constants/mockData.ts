@@ -1,6 +1,6 @@
 import {
   ExploreSectionListType,
-  HomeSectionListType,
+  HomeListType,
   PodcastsSectionListType,
 } from '../types';
 
@@ -58,50 +58,32 @@ export const NEW_PODCASTS_DATA = [
   { id: '3', title: 'Best Friends Back, Alright!', subtitle: '' },
 ];
 
-export const HOME_SECTIONLIST_DATA = [
+export const HOME_DATA = [
   {
+    id: '3',
+    title: '',
+    type: HomeListType.addStations,
+  },
+  {
+    id: '0',
     title: 'Discover Your Favorites',
-    data: [
-      {
-        id: '0',
-        type: HomeSectionListType.discover,
-      },
-    ],
+    type: HomeListType.discover,
   },
   {
+    id: '1',
     title: 'Your City, Your Stations',
-    data: [
-      {
-        id: '1',
-        type: HomeSectionListType.stations,
-      },
-    ],
+    type: HomeListType.stations,
   },
   {
+    id: '2',
     title: 'Featured Music Stations',
-    data: [
-      {
-        id: '2',
-        type: HomeSectionListType.music,
-      },
-    ],
+    type: HomeListType.music,
   },
+
   {
-    data: [
-      {
-        id: '3',
-        type: HomeSectionListType.addStations,
-      },
-    ],
-  },
-  {
+    id: '4',
     title: 'Reccomended Sports Podcasts',
-    data: [
-      {
-        id: '4',
-        type: HomeSectionListType.sportsPodcasts,
-      },
-    ],
+    type: HomeListType.sportsPodcasts,
   },
 ];
 

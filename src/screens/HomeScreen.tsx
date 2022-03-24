@@ -1,17 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { AddStations, CircleList, SquareList } from '../components';
-import {
-  HomeSectionListData,
-  HomeSectionListType,
-  SectionListMetaData,
-} from '../types';
+import { HomeData, HomeListType } from '../types';
 import {
   colors,
   FAVORITES_DATA,
-  HOME_SECTIONLIST_DATA,
+  HOME_DATA,
   MUSIC_STATIONS_DATA,
   STATIONS_DATA,
 } from '../constants';
@@ -30,9 +26,7 @@ import {
 export const HomeScreen = () => {
   const navigation = useNavigation();
 
-  const [homeSectionListData, setHomeSectionListData] = useState<
-    SectionListMetaData[]
-  >(HOME_SECTIONLIST_DATA);
+  const [homeData, setHomeData] = useState<HomeData[]>(HOME_DATA);
 
   useEffect(() => {
     navigation.setOptions({
@@ -50,7 +44,7 @@ export const HomeScreen = () => {
     });
   }, []);
 
-  console.log(homeSectionListData);
+  console.log(homeData);
 
   const renderHeader = () => {
     return (
@@ -63,18 +57,33 @@ export const HomeScreen = () => {
     );
   };
 
-  const renderItem = ({ item }: { item: HomeSectionListData }) => {
+  const renderItem = ({ item }: { item: HomeData }) => {
     switch (item.type) {
-      case HomeSectionListType.discover:
-        return <CircleList data={FAVORITES_DATA} />;
-      case HomeSectionListType.stations:
-        return <SquareList data={STATIONS_DATA} />;
-      case HomeSectionListType.music:
-        return <SquareList data={MUSIC_STATIONS_DATA} />;
-      case HomeSectionListType.addStations:
+      case HomeListType.discover:
+        return (
+          <>
+            <Text style={styles.header}>{item.title}</Text>
+            <CircleList data={FAVORITES_DATA} />
+          </>
+        );
+      case HomeListType.stations:
+        return (
+          <>
+            <Text style={styles.header}>{item.title}</Text>
+            <SquareList data={STATIONS_DATA} />
+          </>
+        );
+      case HomeListType.music:
+        return (
+          <>
+            <Text style={styles.header}>{item.title}</Text>
+            <SquareList data={MUSIC_STATIONS_DATA} />
+          </>
+        );
+      case HomeListType.addStations:
         return <AddStations onClose={onCloseAddStations} />;
-      case HomeSectionListType.sportsPodcasts:
-        return <View style={{ width: 100, height: 100 }} />;
+      case HomeListType.sportsPodcasts:
+        return <Text style={styles.header}>{item.title}</Text>;
       default:
         return <View />;
     }
@@ -82,25 +91,19 @@ export const HomeScreen = () => {
 
   const onCloseAddStations = () => {
     setTimeout(() => {
-      setHomeSectionListData(
-        homeSectionListData.filter(
-          section => section.data[0].type !== HomeSectionListType.addStations,
-        ),
+      setHomeData(
+        homeData.filter(data => data.type !== HomeListType.addStations),
       );
-    }, 300);
+    }, 200);
   };
 
   return (
     <View style={styles.rootContainer}>
-      <SectionList
-        sections={homeSectionListData}
+      <FlatList
+        data={homeData}
         keyExtractor={(item, index) => item.id + index}
         ListHeaderComponent={renderHeader}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.header}>{title}</Text>
-        )}
         showsVerticalScrollIndicator={false}
-        stickySectionHeadersEnabled={false}
         renderItem={renderItem}
       />
     </View>
