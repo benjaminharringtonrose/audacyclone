@@ -1,30 +1,17 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Switch,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Setting } from '../components';
+import { SectionTitle } from '../components/SectionTitle';
 import { colors } from '../constants';
 
 export const SettingsScreen = () => {
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-        backgroundColor: colors.primary,
-        paddingHorizontal: 20,
-      }}>
+    <ScrollView style={styles.root}>
       <Text style={{ color: colors.white }}>
         {'Audacy App Version 13.2.1.'}
       </Text>
       <SectionTitle title={'Audio Settings'} />
-      <Text style={{ color: colors.white, fontSize: 13, marginBottom: 10 }}>
+      <Text style={styles.smallText}>
         {
           'Disabled autoplay to stop playing your recently played station automatically when you launch the app.'
         }
@@ -36,9 +23,7 @@ export const SettingsScreen = () => {
         onPress={() => {}}
       />
       <SectionTitle title={'Location Settings'} />
-      <Text style={{ color: colors.white, fontSize: 13, marginBottom: 10 }}>
-        {'Selected Market: National'}
-      </Text>
+      <Text style={styles.smallText}>{'Selected Market: National'}</Text>
       <Setting
         title={'Change Location'}
         value={''}
@@ -46,7 +31,7 @@ export const SettingsScreen = () => {
         onPress={() => {}}
       />
       <SectionTitle title={'Manage Favorites'} />
-      <Text style={{ color: colors.white, fontSize: 13, marginBottom: 10 }}>
+      <Text style={styles.smallText}>
         {'Re-organize or delete stations from your favorites or recents.'}
       </Text>
       <Setting
@@ -55,10 +40,16 @@ export const SettingsScreen = () => {
         type={'button'}
         onPress={() => {}}
       />
-      <Text
-        style={{ color: colors.accent, fontWeight: '800', marginVertical: 15 }}>
-        {'Clear my Recent Stations History'}
-      </Text>
+      <TouchableOpacity onPress={() => {}}>
+        <Text
+          style={{
+            color: colors.accent,
+            fontWeight: '800',
+            marginVertical: 15,
+          }}>
+          {'Clear my Recent Stations History'}
+        </Text>
+      </TouchableOpacity>
       <SectionTitle title={'Notification Settings'} />
       <Setting
         title={'All Notifications'}
@@ -83,7 +74,7 @@ export const SettingsScreen = () => {
       <Text style={{ color: colors.white, fontSize: 13 }}>
         {'Recommended setting: Off'}
       </Text>
-      <Text style={{ color: colors.white, marginBottom: 10, fontSize: 13 }}>
+      <Text style={styles.smallText}>
         {'Audacy will download podcasts on Wi-Fi only by default.'}
       </Text>
       <Setting
@@ -173,85 +164,15 @@ export const SettingsScreen = () => {
   );
 };
 
-const Setting = ({
-  title,
-  value,
-  type,
-  onPress,
-  noTopBorder,
-}: {
-  title: string;
-  value?: string | boolean;
-  type: 'button' | 'switch';
-  onPress: (value?: boolean) => void;
-  noTopBorder?: boolean;
-}) => {
-  if (type === 'button') {
-    return (
-      <TouchableOpacity
-        style={{
-          flexDirection: 'row',
-          height: 50,
-          alignItems: 'center',
-          borderTopColor: noTopBorder ? undefined : colors.secondary,
-          borderBottomColor: colors.secondary,
-          borderWidth: StyleSheet.hairlineWidth,
-        }}
-        onPress={() => onPress()}>
-        <Text
-          style={{
-            flex: 1,
-            color: colors.white,
-            fontWeight: '700',
-            fontSize: 15,
-          }}>
-          {title}
-        </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ marginRight: 10, color: colors.white, fontSize: 13 }}>
-            {value}
-          </Text>
-          <AntDesign name={'right'} color={colors.white} size={20} />
-        </View>
-      </TouchableOpacity>
-    );
-  } else if (type === 'switch' && typeof value == 'boolean') {
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          height: 50,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderTopColor: noTopBorder ? undefined : colors.secondary,
-          borderBottomColor: colors.secondary,
-          borderWidth: StyleSheet.hairlineWidth,
-        }}>
-        <Text style={{ color: colors.white, fontWeight: '700' }}>{title}</Text>
-        <Switch
-          value={value}
-          onValueChange={value => onPress(value)}
-          trackColor={{ false: '#767577', true: colors.accent }}
-          thumbColor={colors.white}
-          ios_backgroundColor={colors.white}
-        />
-      </View>
-    );
-  } else {
-    return null;
-  }
-};
-
-const SectionTitle = ({ title }: { title: string }) => {
-  return (
-    <View
-      style={{
-        marginTop: 30,
-        marginBottom: 10,
-      }}>
-      <Text style={{ color: colors.white, fontSize: 21, fontWeight: '700' }}>
-        {title}
-      </Text>
-    </View>
-  );
-};
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: colors.primary,
+    paddingHorizontal: 20,
+  },
+  smallText: {
+    color: colors.white,
+    fontSize: 13,
+    marginBottom: 10,
+  },
+});
