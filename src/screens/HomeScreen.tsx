@@ -1,9 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 import { AddStations, CircleList, SquareList } from '../components';
-import { HomeSectionListData, HomeSectionListType } from '../types';
+import {
+  HomeSectionListData,
+  HomeSectionListType,
+  SectionListMetaData,
+} from '../types';
 import {
   colors,
   FAVORITES_DATA,
@@ -26,6 +30,10 @@ import {
 export const HomeScreen = () => {
   const navigation = useNavigation();
 
+  const [homeSectionListData, setHomeSectionListData] = useState<
+    SectionListMetaData[]
+  >(HOME_SECTIONLIST_DATA);
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -41,6 +49,8 @@ export const HomeScreen = () => {
       },
     });
   }, []);
+
+  console.log(homeSectionListData);
 
   const renderHeader = () => {
     return (
@@ -62,7 +72,7 @@ export const HomeScreen = () => {
       case HomeSectionListType.music:
         return <SquareList data={MUSIC_STATIONS_DATA} />;
       case HomeSectionListType.addStations:
-        return <AddStations />;
+        return <AddStations onClose={onCloseAddStations} />;
       case HomeSectionListType.sportsPodcasts:
         return <View style={{ width: 100, height: 100 }} />;
       default:
@@ -70,10 +80,20 @@ export const HomeScreen = () => {
     }
   };
 
+  const onCloseAddStations = () => {
+    setTimeout(() => {
+      setHomeSectionListData(
+        homeSectionListData.filter(
+          section => section.data[0].type !== HomeSectionListType.addStations,
+        ),
+      );
+    }, 300);
+  };
+
   return (
     <View style={styles.rootContainer}>
       <SectionList
-        sections={HOME_SECTIONLIST_DATA}
+        sections={homeSectionListData}
         keyExtractor={(item, index) => item.id + index}
         ListHeaderComponent={renderHeader}
         renderSectionHeader={({ section: { title } }) => (

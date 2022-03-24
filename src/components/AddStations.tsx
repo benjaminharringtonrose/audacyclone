@@ -8,23 +8,24 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-export const AddStations = () => {
+export const AddStations = ({ onClose }: { onClose: () => void }) => {
   const anim = useRef(new Animated.Value(0)).current;
   const opac = useRef(new Animated.Value(1)).current;
 
   const squish = () => {
     Animated.parallel([
       Animated.timing(anim, {
-        toValue: 40,
-        duration: 500,
+        toValue: 30,
+        duration: 300,
         useNativeDriver: false,
       }),
       Animated.timing(opac, {
         toValue: 0,
-        duration: 500,
+        duration: 200,
         useNativeDriver: false,
       }),
     ]).start();
+    onClose();
   };
 
   return (

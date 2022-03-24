@@ -35,3 +35,8 @@ export interface HomeSectionListData {
   id: string;
   type: HomeSectionListType;
 }
+
+export interface SectionListMetaData {
+  title?: string;
+  data: any[];
+}
