@@ -1,3 +1,4 @@
+import { MainStack } from './MainStack';
 import { HomeScreenTabs } from './HomeScreenTabs';
 
-export { HomeScreenTabs };
+export { MainStack, HomeScreenTabs };

@@ -5,7 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
-import { ExploreCell, SearchBar } from '../components';
+import { RectangleCell, SearchBar } from '../components';
+import { RootContainer } from '../components/RootContainer';
+import { colors } from '../constants';
 
 enum SectionListType {
   exclusiveMusicStations = 'exclusiveMusicStations',
@@ -39,46 +41,48 @@ export const ExploreScreen = () => {
   }, []);
 
   return (
-    <View style={styles.rootContainer}>
-      <SearchBar
-        placeholder={'Search station, city, genre, or podcast'}
-        placeholderTextColor={'white'}
-        underlineColorAndroid={'transparent'}
-      />
-      <View style={{ paddingHorizontal: 20 }}>
-        <SectionList
-          sections={SECTIONLIST_DATA}
-          keyExtractor={(item, index) => item.id + index}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.header}>{title}</Text>
-          )}
-          showsVerticalScrollIndicator={false}
-          stickySectionHeadersEnabled={false}
-          renderItem={({ item }: { item: SectionListData }) => {
-            switch (item.type) {
-              case SectionListType.exclusiveMusicStations:
-                return <ExploreCell label={'Exclusive Stations'} />;
-              case SectionListType.musicThatMoves:
-                return <ExploreCell label={'MUSIC'} />;
-              case SectionListType.sportsForEveryFan:
-                return <ExploreCell label={'SPORTS'} />;
-              case SectionListType.theNewsYouNeed:
-                return <ExploreCell label={'NEWS'} />;
-              case SectionListType.yourPassionsOurPodcasts:
-                return <ExploreCell label={'PODCASTSs'} />;
-              default:
-                return <View />;
-            }
-          }}
+    <RootContainer style={styles.rootContainer}>
+      <>
+        <SearchBar
+          placeholder={'Search station, city, genre, or podcast'}
+          placeholderTextColor={'white'}
+          underlineColorAndroid={'transparent'}
         />
-      </View>
-    </View>
+        <View style={{ paddingHorizontal: 20 }}>
+          <SectionList
+            sections={SECTIONLIST_DATA}
+            keyExtractor={(item, index) => item.id + index}
+            renderSectionHeader={({ section: { title } }) => (
+              <Text style={styles.header}>{title}</Text>
+            )}
+            showsVerticalScrollIndicator={false}
+            stickySectionHeadersEnabled={false}
+            renderItem={({ item }: { item: SectionListData }) => {
+              switch (item.type) {
+                case SectionListType.exclusiveMusicStations:
+                  return <RectangleCell label={'Exclusive Stations'} />;
+                case SectionListType.musicThatMoves:
+                  return <RectangleCell label={'MUSIC'} />;
+                case SectionListType.sportsForEveryFan:
+                  return <RectangleCell label={'SPORTS'} />;
+                case SectionListType.theNewsYouNeed:
+                  return <RectangleCell label={'NEWS'} />;
+                case SectionListType.yourPassionsOurPodcasts:
+                  return <RectangleCell label={'PODCASTSs'} />;
+                default:
+                  return <View />;
+              }
+            }}
+          />
+        </View>
+      </>
+    </RootContainer>
   );
 };
 
 const styles = StyleSheet.create({
   rootContainer: {
-    backgroundColor: '#120536',
+    backgroundColor: colors.primary,
   },
   header: {
     fontSize: 21,

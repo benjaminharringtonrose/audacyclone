@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -12,12 +12,14 @@ import Foundation from 'react-native-vector-icons/Foundation';
 import {
   HomeScreen,
   ExploreScreen,
-  PlayerScreen,
   PodcastsScreen,
   SettingsScreen,
 } from '../screens';
+import { colors } from '../constants';
 
 const BottomTab = createBottomTabNavigator();
+
+const PlaceholderScreen = () => <View style={{ flex: 1 }} />;
 
 export function HomeScreenTabs() {
   return (
@@ -29,7 +31,7 @@ export function HomeScreenTabs() {
           );
         },
         headerStyle: {
-          backgroundColor: '#120536',
+          backgroundColor: colors.primary,
           shadowRadius: 0,
           shadowOffset: {
             height: 0,
@@ -72,13 +74,15 @@ export function HomeScreenTabs() {
         }}
       />
       <BottomTab.Screen
-        name="PlayerScreen"
-        component={PlayerScreen}
+        name="Player"
+        component={PlaceholderScreen}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault();
+            navigation.navigate('PlayerScreen');
+          },
+        })}
         options={{
-          title: '',
-          tabBarLabel: 'Player',
-          tabBarInactiveTintColor: 'grey',
-          tabBarActiveTintColor: 'white',
           tabBarIcon: ({ focused }) =>
             focused ? (
               <FontAwesomeIcon name={'play'} size={24} color={'white'} />
@@ -91,7 +95,8 @@ export function HomeScreenTabs() {
         name="PodcastsScreen"
         component={PodcastsScreen}
         options={{
-          title: '',
+          title: 'Podcasts',
+          headerTitleStyle: { color: 'white', fontWeight: '700' },
           tabBarLabel: 'Podcasts',
           tabBarInactiveTintColor: 'grey',
           tabBarActiveTintColor: 'white',
@@ -107,7 +112,8 @@ export function HomeScreenTabs() {
         name="SettingsScreen"
         component={SettingsScreen}
         options={{
-          title: '',
+          title: 'Settings',
+          headerTitleStyle: { color: 'white', fontWeight: '700' },
           tabBarLabel: 'Settings',
           tabBarInactiveTintColor: 'grey',
           tabBarActiveTintColor: 'white',

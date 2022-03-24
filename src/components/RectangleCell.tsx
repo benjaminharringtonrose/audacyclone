@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-interface ExploreCellProps {
+interface RectangleCellProps {
   label: string;
 }
 
-export const ExploreCell = ({ label }: ExploreCellProps) => {
+export const RectangleCell = ({ label }: RectangleCellProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>

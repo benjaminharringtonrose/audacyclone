@@ -1,15 +1,7 @@
-import { FavoritesList } from './FavoritesList';
-import { StationsList } from './StationsList';
-import { MusicStationsList } from './MusicStationsList';
+import { CircleList } from './CircleList';
+import { SquareList } from './SquareList';
 import { AddStations } from './AddStations';
-import { ExploreCell } from './ExploreCell';
+import { RectangleCell } from './RectangleCell';
 import { SearchBar } from './SearchBar';
 
-export {
-  FavoritesList,
-  StationsList,
-  MusicStationsList,
-  AddStations,
-  ExploreCell,
-  SearchBar,
-};
+export { CircleList, SquareList, AddStations, RectangleCell, SearchBar };

@@ -3,10 +3,20 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-export const StationsList = () => {
+interface SquareListData {
+  id: string;
+  title: string;
+  subtitle: string;
+}
+
+interface SquareListProps {
+  data: SquareListData[];
+}
+
+export const SquareList = ({ data }: SquareListProps) => {
   return (
     <FlatList
-      data={STATIONS_DATA}
+      data={data}
       horizontal
       renderItem={({ item }) => {
         return (
@@ -31,10 +41,3 @@ const styles = StyleSheet.create({
   title: { color: '#ffffff', fontWeight: '700', fontSize: 15, width: 120 },
   subtitle: { color: '#ffffff' },
 });
-
-const STATIONS_DATA = [
-  { id: '0', title: 'CBS Sports Radio', subtitle: 'CBS Sports Radio' },
-  { id: '1', title: 'CNN', subtitle: 'The Most Trusted..' },
-  { id: '2', title: 'HLN', subtitle: 'News that hits ho..' },
-  { id: '3', title: 'CNN Español', subtitle: 'El nombre mas c..' },
-];

@@ -5,12 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Image, SectionList, StyleSheet, Text, View } from 'react-native';
-import {
-  AddStations,
-  FavoritesList,
-  MusicStationsList,
-  StationsList,
-} from '../components';
+import { AddStations, CircleList, SquareList } from '../components';
+import { RootContainer } from '../components/RootContainer';
+import { colors } from '../constants';
 
 enum SectionListType {
   discover = 'discover',
@@ -54,72 +51,74 @@ export const HomeScreen = () => {
   }, []);
 
   return (
-    <View style={styles.rootContainer}>
-      <SectionList
-        sections={SECTIONLIST_DATA}
-        keyExtractor={(item, index) => item.id + index}
-        ListHeaderComponent={() => {
-          return (
-            <View
-              style={{
-                height: 100,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+    <RootContainer style={styles.rootContainer}>
+      <>
+        <SectionList
+          sections={SECTIONLIST_DATA}
+          keyExtractor={(item, index) => item.id + index}
+          ListHeaderComponent={() => {
+            return (
               <View
                 style={{
-                  flex: 1,
+                  height: 100,
                   justifyContent: 'center',
-                  marginHorizontal: 20,
+                  alignItems: 'center',
                 }}>
-                <Text
+                <View
                   style={{
-                    color: 'white',
-                    fontWeight: '700',
-                    fontSize: 19,
-                    marginBottom: 5,
-                    paddingLeft: 10,
+                    flex: 1,
+                    justifyContent: 'center',
+                    marginHorizontal: 20,
                   }}>
-                  {'Elevate your experience'}
-                </Text>
-                <Text
-                  style={{
-                    color: '#ff9f59',
-                    fontWeight: '700',
-                    marginHorizontal: 30,
-                    fontSize: 12,
-                  }}>
-                  {
-                    'Customize your homepage by adding your favorite stations below'
-                  }
-                </Text>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontWeight: '700',
+                      fontSize: 19,
+                      marginBottom: 5,
+                      paddingLeft: 10,
+                    }}>
+                    {'Elevate your experience'}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#ff9f59',
+                      fontWeight: '700',
+                      marginHorizontal: 30,
+                      fontSize: 12,
+                    }}>
+                    {
+                      'Customize your homepage by adding your favorite stations below'
+                    }
+                  </Text>
+                </View>
               </View>
-            </View>
-          );
-        }}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.header}>{title}</Text>
-        )}
-        showsVerticalScrollIndicator={false}
-        stickySectionHeadersEnabled={false}
-        renderItem={({ item }: { item: SectionListData }) => {
-          switch (item.type) {
-            case SectionListType.discover:
-              return <FavoritesList />;
-            case SectionListType.stations:
-              return <StationsList />;
-            case SectionListType.music:
-              return <MusicStationsList />;
-            case SectionListType.addStations:
-              return <AddStations />;
-            case SectionListType.sportsPodcasts:
-              return <View style={{ width: 100, height: 100 }} />;
-            default:
-              return <View />;
-          }
-        }}
-      />
-    </View>
+            );
+          }}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.header}>{title}</Text>
+          )}
+          showsVerticalScrollIndicator={false}
+          stickySectionHeadersEnabled={false}
+          renderItem={({ item }: { item: SectionListData }) => {
+            switch (item.type) {
+              case SectionListType.discover:
+                return <CircleList data={FAVORITES_DATA} />;
+              case SectionListType.stations:
+                return <SquareList data={STATIONS_DATA} />;
+              case SectionListType.music:
+                return <SquareList data={MUSIC_STATIONS_DATA} />;
+              case SectionListType.addStations:
+                return <AddStations />;
+              case SectionListType.sportsPodcasts:
+                return <View style={{ width: 100, height: 100 }} />;
+              default:
+                return <View />;
+            }
+          }}
+        />
+      </>
+    </RootContainer>
   );
 };
 
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#120536',
+    backgroundColor: colors.primary,
     paddingHorizontal: 10,
   },
   item: {
@@ -192,4 +191,25 @@ const SECTIONLIST_DATA = [
       },
     ],
   },
+];
+
+const FAVORITES_DATA = [
+  { id: '0', title: 'Exclusive Stations' },
+  { id: '1', title: 'Music' },
+  { id: '2', title: 'Sports' },
+  { id: '3', title: 'News & Talk' },
+  { id: '4', title: 'Podcasts' },
+];
+
+const STATIONS_DATA = [
+  { id: '0', title: 'CBS Sports Radio', subtitle: 'CBS Sports Radio' },
+  { id: '1', title: 'CNN', subtitle: 'The Most Trusted..' },
+  { id: '2', title: 'HLN', subtitle: 'News that hits ho..' },
+  { id: '3', title: 'CNN Español', subtitle: 'El nombre mas c..' },
+];
+
+const MUSIC_STATIONS_DATA = [
+  { id: '0', title: 'She Sings', subtitle: 'Celebrating the p..' },
+  { id: '1', title: 'Justin Beiber Radio', subtitle: 'Listen up if you lo..' },
+  { id: '2', title: 'Women that Rock', subtitle: 'Women that Rock' },
 ];

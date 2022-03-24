@@ -2,13 +2,14 @@
 import React from 'react';
 import { TextInput, TextInputProps, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../constants';
 
 export const SearchBar = (props: TextInputProps) => {
   return (
     <View
       {...props}
       style={{
-        backgroundColor: '#19338a',
+        backgroundColor: colors.secondary,
         minHeight: 35,
         borderRadius: 10,
         marginHorizontal: 10,

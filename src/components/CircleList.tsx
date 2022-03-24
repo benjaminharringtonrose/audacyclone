@@ -2,10 +2,19 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 
-export const FavoritesList = () => {
+interface CircleListData {
+  id: string;
+  title: string;
+}
+
+interface CircleListProps {
+  data: CircleListData[];
+}
+
+export const CircleList = ({ data }: CircleListProps) => {
   return (
     <FlatList
-      data={FAVORITES_DATA}
+      data={data}
       horizontal
       showsHorizontalScrollIndicator={false}
       renderItem={({ item }) => {
@@ -36,11 +45,3 @@ export const FavoritesList = () => {
     />
   );
 };
-
-const FAVORITES_DATA = [
-  { id: '0', title: 'Exclusive Stations' },
-  { id: '1', title: 'Music' },
-  { id: '2', title: 'Sports' },
-  { id: '3', title: 'News & Talk' },
-  { id: '4', title: 'Podcasts' },
-];
