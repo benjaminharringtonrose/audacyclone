@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface RectangleCellProps {
   label: string;
@@ -7,9 +7,9 @@ interface RectangleCellProps {
 
 export const RectangleCell = ({ label }: RectangleCellProps) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

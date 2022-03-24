@@ -12,6 +12,17 @@ import {
   STATIONS_DATA,
 } from '../constants';
 
+// I assume this data for the SectionList will be fetched at init -
+// also noticed that the order of it changes which is super cool.
+// The mock data I created is super slim - I'm sure there's a whole lot
+// more that comes in for each section. When a user presses any buttons,
+// there's navigation params coming with it to fetch what is
+// needed for the next screen.
+
+// Question - are any of these images static? If so, they could be moved to the native
+// side to improve performance. If they're on the native side, there's zero load time. Even
+// if the images are statically stored on the js side, it still has to go over the bridge
+
 export const HomeScreen = () => {
   const navigation = useNavigation();
 

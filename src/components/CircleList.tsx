@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 interface CircleListData {
   id: string;
@@ -18,9 +18,9 @@ export const CircleList = ({ data }: CircleListProps) => {
       showsHorizontalScrollIndicator={false}
       renderItem={({ item }) => {
         return (
-          <View style={styles.itemContainer}>
+          <TouchableOpacity style={styles.itemContainer}>
             <Text style={styles.itemText}>{item.title}</Text>
-          </View>
+          </TouchableOpacity>
         );
       }}
     />

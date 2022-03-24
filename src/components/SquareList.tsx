@@ -1,5 +1,11 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 interface SquareListData {
   id: string;
@@ -19,7 +25,7 @@ export const SquareList = ({ data }: SquareListProps) => {
       renderItem={({ item }) => {
         return (
           <View style={styles.container}>
-            <View style={styles.textContainer} />
+            <TouchableOpacity style={styles.textContainer} />
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.subtitle}>{item.subtitle}</Text>
           </View>

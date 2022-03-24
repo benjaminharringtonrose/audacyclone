@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Setting } from '../components';
 import { SectionTitle } from '../components/SectionTitle';
@@ -10,6 +10,13 @@ export const SettingsScreen = () => {
   const [useCellularData, setUseCellularData] = useState<boolean>(false);
   const [autoDownload, setAutoDownload] = useState<boolean>(true);
   const [deletePlayed, setDeletePlayed] = useState<boolean>(true);
+
+  useEffect(() => {
+    // Here's where one could dispatch an action to update the state in local/remote storage
+    // if I had to guess I'd assume it's local storage. We could either trigger a saga or
+    // directly use AsyncStorage or SecureStore
+  }, [disabledAutoplay]);
+
   return (
     <ScrollView style={styles.root}>
       <Text style={{ color: colors.white }}>

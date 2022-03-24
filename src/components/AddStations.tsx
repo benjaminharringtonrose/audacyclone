@@ -1,22 +1,62 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useRef } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Animated,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export const AddStations = () => {
+  const anim = useRef(new Animated.Value(0)).current;
+  const opac = useRef(new Animated.Value(1)).current;
+
+  const squish = () => {
+    Animated.parallel([
+      Animated.timing(anim, {
+        toValue: 40,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(opac, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.closeContainer}>
+    <Animated.View
+      style={[
+        styles.container,
+        {
+          opacity: opac,
+          transform: [
+            {
+              translateY: anim.interpolate({
+                inputRange: [0, 40],
+                outputRange: [0, -40],
+              }),
+            },
+          ],
+        },
+      ]}>
+      <TouchableOpacity style={styles.closeContainer} onPress={squish}>
         <Icon
           name={'close'}
           size={24}
           color={'grey'}
           style={styles.closeIcon}
         />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>{'Add Your Favorite Stations'}</Text>
-      </View>
-    </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => {}}>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>{'Add Your Favorite Stations'}</Text>
+        </View>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
@@ -27,17 +67,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#062580',
   },
   closeContainer: {
-    flex: 1,
     alignItems: 'flex-end',
   },
   textContainer: {
-    flex: 1,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
+    paddingTop: 10,
     alignItems: 'center',
   },
   closeIcon: {
