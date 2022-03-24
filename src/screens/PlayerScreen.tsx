@@ -20,7 +20,7 @@ export const PlayerScreen = () => {
             <AntDesign
               name={'down'}
               size={20}
-              color={'white'}
+              color={colors.white}
               style={{ paddingLeft: 10 }}
             />
           </TouchableOpacity>
@@ -32,7 +32,7 @@ export const PlayerScreen = () => {
   return (
     <View style={styles.root}>
       <View style={styles.body}>
-        <FontAwesome name={'music'} size={80} color={'white'} />
+        <FontAwesome name={'music'} size={80} color={colors.white} />
         <Text style={styles.bodyText}>
           {'Select a podcast or radio station to use player.'}
         </Text>
@@ -41,21 +41,21 @@ export const PlayerScreen = () => {
         <AntDesign
           name={'stepbackward'}
           size={40}
-          color={'white'}
+          color={colors.white}
           onPress={() => {}}
           style={{}}
         />
         <AntDesign
           name={'play'}
           size={40}
-          color={'white'}
+          color={colors.white}
           onPress={() => {}}
           style={{ paddingHorizontal: 20 }}
         />
         <AntDesign
           name={'stepforward'}
           size={40}
-          color={'white'}
+          color={colors.white}
           onPress={() => {}}
         />
       </View>

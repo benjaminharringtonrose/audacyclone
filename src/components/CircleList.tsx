@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 interface CircleListData {
   id: string;
@@ -19,29 +18,30 @@ export const CircleList = ({ data }: CircleListProps) => {
       showsHorizontalScrollIndicator={false}
       renderItem={({ item }) => {
         return (
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 124,
-              height: 124,
-              borderRadius: 62,
-              backgroundColor: 'grey',
-              marginHorizontal: 5,
-            }}>
-            <Text
-              style={{
-                color: 'white',
-                textAlign: 'center',
-                fontWeight: '700',
-                fontSize: 15,
-              }}>
-              {item.title}
-            </Text>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>{item.title}</Text>
           </View>
         );
       }}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 124,
+    height: 124,
+    borderRadius: 62,
+    backgroundColor: 'grey',
+    marginHorizontal: 5,
+  },
+  itemText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '700',
+    fontSize: 15,
+  },
+});

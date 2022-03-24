@@ -1,4 +1,8 @@
-import { HomeSectionListType, PodcastsSectionListType } from '../types';
+import {
+  ExploreSectionListType,
+  HomeSectionListType,
+  PodcastsSectionListType,
+} from '../types';
 
 export const PODCASTS_SECTIONLIST_DATA = [
   {
@@ -120,4 +124,52 @@ export const MUSIC_STATIONS_DATA = [
   { id: '0', title: 'She Sings', subtitle: 'Celebrating the p..' },
   { id: '1', title: 'Justin Beiber Radio', subtitle: 'Listen up if you lo..' },
   { id: '2', title: 'Women that Rock', subtitle: 'Women that Rock' },
+];
+
+export const EXPLORE_SECTIONLIST_DATA = [
+  {
+    title: 'Exclusive Music Stations',
+    data: [
+      {
+        id: '0',
+        type: ExploreSectionListType.exclusiveMusicStations,
+      },
+    ],
+  },
+  {
+    title: 'Music That Moves',
+    data: [
+      {
+        id: '1',
+        type: ExploreSectionListType.musicThatMoves,
+      },
+    ],
+  },
+  {
+    title: 'Sports for Every Fan',
+    data: [
+      {
+        id: '2',
+        type: ExploreSectionListType.sportsForEveryFan,
+      },
+    ],
+  },
+  {
+    title: 'The News You Need',
+    data: [
+      {
+        id: '3',
+        type: ExploreSectionListType.theNewsYouNeed,
+      },
+    ],
+  },
+  {
+    title: 'Your Passions Our Podcasts',
+    data: [
+      {
+        id: '4',
+        type: ExploreSectionListType.yourPassionsOurPodcasts,
+      },
+    ],
+  },
 ];

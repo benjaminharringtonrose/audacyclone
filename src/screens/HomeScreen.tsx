@@ -24,6 +24,7 @@ export const HomeScreen = () => {
             size={24}
             color={'white'}
             style={{ marginRight: 10 }}
+            onPress={() => {}}
           />
         );
       },
