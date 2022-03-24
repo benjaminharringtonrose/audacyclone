@@ -2,7 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Image, SectionList, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  SectionList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { CircleList, RectangleCell, SquareList } from '../components';
 import { PodcastsSectionListData, PodcastsSectionListType } from '../types';
 import {
@@ -65,9 +72,11 @@ export const PodcastsScreen = () => {
     }
   };
 
+  const discoverTabSelected = selectedIndex === 0;
+
   return (
     <View style={styles.rootContainer}>
-      {selectedIndex === 0 ? (
+      {discoverTabSelected ? (
         <SectionList
           sections={PODCASTS_SECTIONLIST_DATA}
           keyExtractor={(item, index) => item.id + index}
@@ -93,11 +102,14 @@ export const PodcastsScreen = () => {
             tintColor={colors.accent}
           />
           <View style={styles.noSubscribersBody}>
-            <Image
-              source={require('../../assets/podcast-button.jpg')}
-              resizeMode={'contain'}
-              style={styles.podcastButton}
-            />
+            <TouchableOpacity>
+              <Image
+                source={require('../../assets/podcast-button.jpg')}
+                resizeMode={'contain'}
+                style={styles.podcastButton}
+              />
+            </TouchableOpacity>
+
             <Text style={styles.noSubscribersTitle}>
               {'No Subscribed Podcasts'}
             </Text>
