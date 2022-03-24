@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Image, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,8 +15,9 @@ import {
   SettingsScreen,
 } from '../screens';
 import { colors } from '../constants';
+import { BottomTabParamList } from './types';
 
-const BottomTab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 const PlaceholderScreen = () => <View style={{ flex: 1 }} />;
 
@@ -84,7 +84,7 @@ export function HomeScreenTabs() {
         }}
       />
       <BottomTab.Screen
-        name="Player"
+        name="Placeholder"
         component={PlaceholderScreen}
         listeners={({ navigation }) => ({
           tabPress: e => {
