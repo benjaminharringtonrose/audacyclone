@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Setting } from '../components';
 import { SectionTitle } from '../components/SectionTitle';
 import { colors } from '../constants';
 
 export const SettingsScreen = () => {
+  const [disabledAutoplay, setDisabledAutoplay] = useState<boolean>(false);
+  const [allNotifications, setAllNotifications] = useState<boolean>(true);
+  const [useCellularData, setUseCellularData] = useState<boolean>(false);
+  const [autoDownload, setAutoDownload] = useState<boolean>(true);
+  const [deletePlayed, setDeletePlayed] = useState<boolean>(true);
   return (
     <ScrollView style={styles.root}>
       <Text style={{ color: colors.white }}>
@@ -18,9 +23,9 @@ export const SettingsScreen = () => {
       </Text>
       <Setting
         title={'Disable Autoplay'}
-        value={false}
+        value={disabledAutoplay}
         type={'switch'}
-        onPress={() => {}}
+        onPress={() => setDisabledAutoplay(!disabledAutoplay)}
       />
       <SectionTitle title={'Location Settings'} />
       <Text style={styles.smallText}>{'Selected Market: National'}</Text>
@@ -53,9 +58,9 @@ export const SettingsScreen = () => {
       <SectionTitle title={'Notification Settings'} />
       <Setting
         title={'All Notifications'}
-        value={true}
+        value={allNotifications}
         type={'switch'}
-        onPress={() => {}}
+        onPress={() => setAllNotifications(!allNotifications)}
       />
       <Setting
         title={'Favorite Station Notifications'}
@@ -67,9 +72,9 @@ export const SettingsScreen = () => {
       <SectionTitle title={'Podcast Settings'} />
       <Setting
         title={'Download Using Cellular Data'}
-        value={false}
+        value={useCellularData}
         type={'switch'}
-        onPress={() => {}}
+        onPress={() => setUseCellularData(!useCellularData)}
       />
       <Text style={{ color: colors.white, fontSize: 13 }}>
         {'Recommended setting: Off'}
@@ -85,9 +90,9 @@ export const SettingsScreen = () => {
       />
       <Setting
         title={'Auto-download Episodes'}
-        value={true}
+        value={autoDownload}
         type={'switch'}
-        onPress={() => {}}
+        onPress={() => setAutoDownload(!autoDownload)}
         noTopBorder
       />
       <Setting
@@ -106,9 +111,9 @@ export const SettingsScreen = () => {
       />
       <Setting
         title={'Delete Played Episodes'}
-        value={true}
+        value={deletePlayed}
         type={'switch'}
-        onPress={() => {}}
+        onPress={() => setDeletePlayed(!deletePlayed)}
         noTopBorder
       />
       <SectionTitle title={'Other Settings'} />
