@@ -58,7 +58,8 @@ export function HomeScreenTabs() {
         name="ExploreScreen"
         component={ExploreScreen}
         options={{
-          title: '',
+          title: 'Explore',
+          headerTitleStyle: { color: 'white', fontWeight: '700' },
           tabBarLabel: 'Explore',
           tabBarInactiveTintColor: 'grey',
           tabBarActiveTintColor: 'white',

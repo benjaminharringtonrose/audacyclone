@@ -34,8 +34,9 @@ export const HomeScreen = () => {
       headerLeft: () => {
         return (
           <Image
-            source={require('../../assets/audacy-icon.png')}
-            style={{ width: 40, height: 40, marginLeft: 10 }}
+            resizeMode={'contain'}
+            source={require('../../assets/audacy-icon.jpg')}
+            style={{ width: 35, height: 35, marginLeft: 10 }}
           />
         );
       },
