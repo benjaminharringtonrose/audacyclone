@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface SettingsState {
+  initialized: boolean;
   initApplicationLoading: boolean;
   initApplicationError?: Error;
   autoplayEnabled: boolean;
@@ -13,6 +14,7 @@ export interface SettingsState {
 }
 
 const initialState: SettingsState = {
+  initialized: false,
   initApplicationLoading: true,
   autoplayEnabled: false,
   loadingAutoplayEnabled: false,
@@ -34,6 +36,7 @@ export const settingsSlice = createSlice({
       return {
         ...state,
         ...data,
+        initialized: true,
       };
     },
     initApplicationFailed(state, action: PayloadAction<{ error: Error }>) {

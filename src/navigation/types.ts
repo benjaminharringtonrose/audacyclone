@@ -1,6 +1,7 @@
 export type MainStackParamList = {
   HomeScreenTabs: undefined;
   PlayerScreen: undefined;
+  LoadingScreen: undefined;
 };
 
 export type BottomTabParamList = {

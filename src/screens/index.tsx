@@ -3,6 +3,7 @@ import { ExploreScreen } from './ExploreScreen';
 import { PlayerScreen } from './PlayerScreen';
 import { PodcastsScreen } from './PodcastsScreen';
 import { SettingsScreen } from './SettingsScreen';
+import { LoadingScreen } from './LoadingScreen';
 
 export {
   HomeScreen,
@@ -10,4 +11,5 @@ export {
   PlayerScreen,
   PodcastsScreen,
   SettingsScreen,
+  LoadingScreen,
 };

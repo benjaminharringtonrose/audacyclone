@@ -1,9 +1,10 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { keys } from '../../constants';
 import { getString, storeString } from '../AsyncStorage';
 import {
   BooleanPayloadAction,
+  initApplicationFailed,
+  initApplicationRequested,
   initApplicationSucceeded,
   setAllNotifications,
   setAutoDownloadEpisodes,
@@ -25,13 +26,15 @@ function* initApplicationSaga() {
       autoplayEnabled,
     };
     yield put(initApplicationSucceeded({ data }));
-  } catch (error) {}
+  } catch (error) {
+    yield put(initApplicationFailed({ error }));
+  }
 }
 
 function* setAutoplaySaga(action: BooleanPayloadAction) {
   const { enabled } = action.payload;
   try {
-    let autoplayEnabled = enabled ? 'true' : 'false';
+    const autoplayEnabled = enabled ? 'true' : 'false';
     yield call(storeString, keys.autoplayEnabled, autoplayEnabled);
     yield put(setAutoplaySucceeded({ enabled: true }));
   } catch (error) {
