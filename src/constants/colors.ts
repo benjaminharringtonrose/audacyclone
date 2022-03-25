@@ -3,4 +3,5 @@ export const colors = {
   secondary: '#19338a',
   accent: '#ff6a00',
   white: '#ffffff',
+  grey: 'grey',
 };

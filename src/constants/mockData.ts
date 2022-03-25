@@ -60,11 +60,6 @@ export const NEW_PODCASTS_DATA = [
 
 export const HOME_DATA = [
   {
-    id: '3',
-    title: '',
-    type: HomeListType.addStations,
-  },
-  {
     id: '0',
     title: 'Discover Your Favorites',
     type: HomeListType.discover,
@@ -79,7 +74,11 @@ export const HOME_DATA = [
     title: 'Featured Music Stations',
     type: HomeListType.music,
   },
-
+  {
+    id: '3',
+    title: '',
+    type: HomeListType.addStations,
+  },
   {
     id: '4',
     title: 'Reccomended Sports Podcasts',

@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { Image } from 'react-native';
-import { colors } from '../constants';
+import { colors, images } from '../constants';
 import { PlayerScreen } from '../screens';
 import { HomeScreenTabs } from './HomeScreenTabs';
 import { MainStackParamList } from './types';
@@ -30,7 +30,7 @@ export function MainStack() {
         options={{
           headerTitle: () => (
             <Image
-              source={require('../../assets/audacy-logo.jpg')}
+              source={images.audacyLogo}
               resizeMode={'contain'}
               style={{ width: 200 }}
             />

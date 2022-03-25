@@ -19,10 +19,6 @@ import {
 // there's navigation params coming with it to fetch what is
 // needed for the next screen.
 
-// Question - are any of these images static? If so, they could be moved to the native
-// side to improve performance. If they're on the native side, there's zero load time. Even
-// if the images are statically stored on the js side, it still has to go over the bridge
-
 export const HomeScreen = () => {
   const navigation = useNavigation();
 
@@ -35,7 +31,7 @@ export const HomeScreen = () => {
           <Icon
             name={'devices'}
             size={24}
-            color={'white'}
+            color={colors.white}
             style={{ marginRight: 10 }}
             onPress={() => {}}
           />
@@ -62,28 +58,32 @@ export const HomeScreen = () => {
       case HomeListType.discover:
         return (
           <>
-            <Text style={styles.header}>{item.title}</Text>
+            <Text style={styles.sectionHeader}>{item.title}</Text>
             <CircleList data={FAVORITES_DATA} />
           </>
         );
       case HomeListType.stations:
         return (
           <>
-            <Text style={styles.header}>{item.title}</Text>
+            <Text style={styles.sectionHeader}>{item.title}</Text>
             <SquareList data={STATIONS_DATA} />
           </>
         );
       case HomeListType.music:
         return (
           <>
-            <Text style={styles.header}>{item.title}</Text>
+            <Text style={styles.sectionHeader}>{item.title}</Text>
             <SquareList data={MUSIC_STATIONS_DATA} />
           </>
         );
       case HomeListType.addStations:
-        return <AddStations onClose={onCloseAddStations} />;
+        return (
+          <View style={{ paddingTop: 20 }}>
+            <AddStations onClose={onCloseAddStations} />
+          </View>
+        );
       case HomeListType.sportsPodcasts:
-        return <Text style={styles.header}>{item.title}</Text>;
+        return <Text style={styles.sectionHeader}>{item.title}</Text>;
       default:
         return <View />;
     }
@@ -118,11 +118,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     paddingHorizontal: 10,
   },
-  header: {
+  sectionHeader: {
     fontSize: 21,
     fontWeight: '700',
-    paddingVertical: 10,
-    color: '#ffffff',
+    paddingBottom: 30,
+    paddingTop: 20,
+    color: colors.white,
   },
   headerContainer: {
     height: 100,
@@ -132,13 +133,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   headerTitle: {
-    color: 'white',
+    color: colors.white,
     fontWeight: '700',
     fontSize: 19,
     marginBottom: 5,
   },
   headerDescription: {
-    color: '#ff9f59',
+    color: colors.accent,
     fontWeight: '700',
     marginHorizontal: 30,
     fontSize: 12,

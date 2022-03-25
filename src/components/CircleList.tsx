@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { colors } from '../constants';
 
 interface CircleListData {
   id: string;
@@ -35,11 +36,11 @@ const styles = StyleSheet.create({
     width: 124,
     height: 124,
     borderRadius: 62,
-    backgroundColor: 'grey',
+    backgroundColor: colors.grey,
     marginHorizontal: 5,
   },
   itemText: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 15,

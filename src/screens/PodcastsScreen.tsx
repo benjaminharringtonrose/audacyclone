@@ -15,6 +15,7 @@ import { PodcastsSectionListData, PodcastsSectionListType } from '../types';
 import {
   colors,
   EXPLORE_PODCASTS_DATA,
+  images,
   NEW_PODCASTS_DATA,
   PODCASTS_SECTIONLIST_DATA,
 } from '../constants';
@@ -104,7 +105,7 @@ export const PodcastsScreen = () => {
           <View style={styles.noSubscribersBody}>
             <TouchableOpacity>
               <Image
-                source={require('../../assets/podcast-button.jpg')}
+                source={images.podcastButton}
                 resizeMode={'contain'}
                 style={styles.podcastButton}
               />

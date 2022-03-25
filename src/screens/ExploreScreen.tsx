@@ -16,7 +16,7 @@ export const ExploreScreen = () => {
           <MaterialCommunityIcons
             name={'devices'}
             size={24}
-            color={'white'}
+            color={colors.white}
             style={{ marginRight: 10 }}
           />
         );
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: '700',
     paddingVertical: 20,
-    color: '#ffffff',
+    color: colors.white,
   },
   title: {
     fontSize: 24,

@@ -20,9 +20,9 @@ export const SearchBar = (props: SearchBarProps) => {
         style={styles.icon}
         name="ios-search"
         size={20}
-        color={'white'}
+        color={colors.white}
       />
-      <TextInput {...props.textInputProps} style={{ color: 'white' }} />
+      <TextInput {...props.textInputProps} style={{ color: colors.white }} />
     </View>
   );
 };

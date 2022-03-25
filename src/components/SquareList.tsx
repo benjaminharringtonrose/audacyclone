@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { colors } from '../constants';
 
 interface SquareListData {
   id: string;
@@ -40,15 +41,15 @@ const styles = StyleSheet.create({
   textContainer: {
     width: 120,
     height: 120,
-    backgroundColor: 'grey',
+    backgroundColor: colors.grey,
   },
   title: {
-    color: '#ffffff',
+    color: colors.white,
     fontWeight: '700',
     fontSize: 15,
     width: 120,
   },
   subtitle: {
-    color: '#ffffff',
+    color: colors.white,
   },
 });

@@ -7,6 +7,7 @@ import {
   Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { colors } from '../constants';
 
 export const AddStations = ({ onClose }: { onClose: () => void }) => {
   const anim = useRef(new Animated.Value(0)).current;
@@ -48,7 +49,7 @@ export const AddStations = ({ onClose }: { onClose: () => void }) => {
         <Icon
           name={'close'}
           size={24}
-          color={'grey'}
+          color={colors.grey}
           style={styles.closeIcon}
         />
       </TouchableOpacity>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 100,
-    backgroundColor: '#062580',
+    backgroundColor: colors.secondary,
   },
   closeContainer: {
     alignItems: 'flex-end',
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   text: {
-    color: '#ff6a00',
+    color: colors.accent,
     fontWeight: '700',
     fontSize: 15,
   },

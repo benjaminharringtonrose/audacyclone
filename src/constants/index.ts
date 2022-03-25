@@ -1,4 +1,5 @@
 import { colors } from './colors';
+import { images } from './images';
 import {
   PODCASTS_SECTIONLIST_DATA,
   EXPLORE_PODCASTS_DATA,
@@ -12,6 +13,7 @@ import {
 
 export {
   colors,
+  images,
   PODCASTS_SECTIONLIST_DATA,
   EXPLORE_PODCASTS_DATA,
   NEW_PODCASTS_DATA,

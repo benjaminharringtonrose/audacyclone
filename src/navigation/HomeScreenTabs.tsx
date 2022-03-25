@@ -14,7 +14,7 @@ import {
   PodcastsScreen,
   SettingsScreen,
 } from '../screens';
-import { colors } from '../constants';
+import { colors, images } from '../constants';
 import { BottomTabParamList } from './types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -26,9 +26,7 @@ export function HomeScreenTabs() {
     <BottomTab.Navigator
       screenOptions={{
         tabBarBackground: () => {
-          return (
-            <Image source={require('../../assets/bottom-tab-background.png')} />
-          );
+          return <Image source={images.bottomTabBackground} />;
         },
         headerStyle: {
           backgroundColor: colors.primary,
@@ -49,19 +47,19 @@ export function HomeScreenTabs() {
             return (
               <Image
                 resizeMode={'contain'}
-                source={require('../../assets/audacy-icon.jpg')}
+                source={images.audacityIcon}
                 style={{ width: 35, height: 35, marginLeft: 10 }}
               />
             );
           },
           tabBarLabel: 'Home',
-          tabBarInactiveTintColor: 'grey',
-          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: colors.grey,
+          tabBarActiveTintColor: colors.white,
           tabBarIcon: ({ focused }) => (
             <Ionicons
               name={focused ? 'home' : 'home-outline'}
               size={26}
-              color={'white'}
+              color={colors.white}
             />
           ),
         }}
@@ -71,15 +69,15 @@ export function HomeScreenTabs() {
         component={ExploreScreen}
         options={{
           title: 'Explore',
-          headerTitleStyle: { color: 'white', fontWeight: '700' },
+          headerTitleStyle: { color: colors.white, fontWeight: '700' },
           tabBarLabel: 'Explore',
-          tabBarInactiveTintColor: 'grey',
-          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: colors.grey,
+          tabBarActiveTintColor: colors.white,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <FontAwesomeIcon name={'search'} size={26} color={'white'} />
+              <FontAwesomeIcon name={'search'} size={26} color={colors.white} />
             ) : (
-              <AntIcon name={'search1'} size={26} color={'white'} />
+              <AntIcon name={'search1'} size={26} color={colors.white} />
             ),
         }}
       />
@@ -95,9 +93,9 @@ export function HomeScreenTabs() {
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <FontAwesomeIcon name={'play'} size={24} color={'white'} />
+              <FontAwesomeIcon name={'play'} size={24} color={colors.white} />
             ) : (
-              <Feather name={'play'} size={24} color={'white'} />
+              <Feather name={'play'} size={24} color={colors.white} />
             ),
         }}
       />
@@ -106,15 +104,19 @@ export function HomeScreenTabs() {
         component={PodcastsScreen}
         options={{
           title: 'Podcasts',
-          headerTitleStyle: { color: 'white', fontWeight: '700' },
+          headerTitleStyle: { color: colors.white, fontWeight: '700' },
           tabBarLabel: 'Podcasts',
-          tabBarInactiveTintColor: 'grey',
-          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: colors.grey,
+          tabBarActiveTintColor: colors.white,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Foundation name={'microphone'} size={32} color={'white'} />
+              <Foundation name={'microphone'} size={32} color={colors.white} />
             ) : (
-              <SimpleLineIcons name={'microphone'} size={26} color={'white'} />
+              <SimpleLineIcons
+                name={'microphone'}
+                size={26}
+                color={colors.white}
+              />
             ),
         }}
       />
@@ -123,15 +125,15 @@ export function HomeScreenTabs() {
         component={SettingsScreen}
         options={{
           title: 'Settings',
-          headerTitleStyle: { color: 'white', fontWeight: '700' },
+          headerTitleStyle: { color: colors.white, fontWeight: '700' },
           tabBarLabel: 'Settings',
-          tabBarInactiveTintColor: 'grey',
-          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: colors.grey,
+          tabBarActiveTintColor: colors.white,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <FontAwesomeIcon name={'gear'} size={26} color={'white'} />
+              <FontAwesomeIcon name={'gear'} size={26} color={colors.white} />
             ) : (
-              <EvilIcons name={'gear'} size={26} color={'white'} />
+              <EvilIcons name={'gear'} size={26} color={colors.white} />
             ),
         }}
       />
