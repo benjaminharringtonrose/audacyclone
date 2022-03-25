@@ -1,7 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { AddStations, CircleList, SquareList } from '../components';
 import { HomeData, HomeListType } from '../types';
 import {
@@ -66,7 +74,19 @@ export const HomeScreen = () => {
         return (
           <>
             <Text style={styles.sectionHeader}>{item.title}</Text>
-            <SquareList data={STATIONS_DATA} />
+            <SquareList
+              data={STATIONS_DATA}
+              iconTopLeft={() => (
+                <TouchableOpacity>
+                  <FontAwesome name={'heart'} color={'white'} size={20} />
+                </TouchableOpacity>
+              )}
+              iconBottomRight={() => (
+                <TouchableOpacity>
+                  <Feather name={'play'} color={'white'} size={20} />
+                </TouchableOpacity>
+              )}
+            />
           </>
         );
       case HomeListType.music:

@@ -16,9 +16,12 @@ interface SquareListData {
 
 interface SquareListProps {
   data: SquareListData[];
+  iconTopLeft?: () => JSX.Element;
+  iconBottomRight?: () => JSX.Element;
 }
 
-export const SquareList = ({ data }: SquareListProps) => {
+export const SquareList = (props: SquareListProps) => {
+  const { data, iconTopLeft, iconBottomRight } = props;
   return (
     <FlatList
       data={data}
@@ -26,7 +29,32 @@ export const SquareList = ({ data }: SquareListProps) => {
       renderItem={({ item }) => {
         return (
           <View style={styles.container}>
-            <TouchableOpacity style={styles.textContainer} />
+            <TouchableOpacity style={styles.textContainer}>
+              <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                {!!iconTopLeft && (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}>
+                    <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                      {iconTopLeft()}
+                    </View>
+                  </View>
+                )}
+                {!!iconBottomRight && (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'flex-end',
+                    }}>
+                    <View style={{ marginRight: 5, marginBottom: 5 }}>
+                      {iconBottomRight()}
+                    </View>
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.subtitle}>{item.subtitle}</Text>
           </View>
