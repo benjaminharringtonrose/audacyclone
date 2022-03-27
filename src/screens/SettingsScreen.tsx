@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Setting } from '../components';
 import { SectionTitle } from '../components/SectionTitle';
-import { colors } from '../constants';
+import { colors, spacings, fonts } from '../constants';
 import { RootState } from '../store';
 import {
   setAutoplayRequested,
@@ -84,7 +84,7 @@ export const SettingsScreen = () => {
           style={{
             color: colors.accent,
             fontWeight: '800',
-            marginVertical: 15,
+            marginVertical: spacings.med,
           }}>
           {'Clear my Recent Stations History'}
         </Text>
@@ -110,9 +110,7 @@ export const SettingsScreen = () => {
         type={'switch'}
         onPress={onToggleUseCellularData}
       />
-      <Text style={{ color: colors.white, fontSize: 13 }}>
-        {'Recommended setting: Off'}
-      </Text>
+      <Text style={fonts.xsmall}>{'Recommended setting: Off'}</Text>
       <Text style={styles.smallText}>
         {'Audacy will download podcasts on Wi-Fi only by default.'}
       </Text>
