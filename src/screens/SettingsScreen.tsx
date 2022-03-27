@@ -1,21 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Setting } from '../components';
 import { SectionTitle } from '../components/SectionTitle';
 import { colors } from '../constants';
+import { RootState } from '../store';
+import {
+  setAutoplayRequested,
+  setAllNotifications,
+  setUseCellularData,
+  setAutoDownloadEpisodes,
+  setDeletePlayedEpisodes,
+} from '../store/settings/slice';
 
 export const SettingsScreen = () => {
-  const [disabledAutoplay, setDisabledAutoplay] = useState<boolean>(false);
-  const [allNotifications, setAllNotifications] = useState<boolean>(true);
-  const [useCellularData, setUseCellularData] = useState<boolean>(false);
-  const [autoDownload, setAutoDownload] = useState<boolean>(true);
-  const [deletePlayed, setDeletePlayed] = useState<boolean>(true);
+  const {
+    autoplayEnabled,
+    allNotificationsEnabled,
+    useCellularData,
+    autoDownloadEpisodes,
+    deletePlayedEpisodes,
+  } = useSelector((state: RootState) => state.settings);
 
-  useEffect(() => {
-    // Here's where one could dispatch an action to update the state in local/remote storage
-    // if I had to guess I'd assume it's local storage. We could either trigger a saga or
-    // directly use AsyncStorage or SecureStore
-  }, [disabledAutoplay]);
+  const dispatch = useDispatch();
+
+  const onToggleDisabledAutoplay = () => {
+    dispatch(setAutoplayRequested({ enabled: !autoplayEnabled }));
+  };
+
+  const onToggleAllNotifications = () => {
+    dispatch(setAllNotifications({ enabled: !allNotificationsEnabled }));
+  };
+
+  const onToggleUseCellularData = () => {
+    dispatch(setUseCellularData({ enabled: !useCellularData }));
+  };
+
+  const onToggleAutoDownload = () => {
+    dispatch(setAutoDownloadEpisodes({ enabled: !autoDownloadEpisodes }));
+  };
+
+  const onToggleDeletePlayedEpisodes = () => {
+    dispatch(setDeletePlayedEpisodes({ enabled: !deletePlayedEpisodes }));
+  };
 
   return (
     <ScrollView style={styles.root}>
@@ -30,9 +57,9 @@ export const SettingsScreen = () => {
       </Text>
       <Setting
         title={'Disable Autoplay'}
-        value={disabledAutoplay}
+        value={autoplayEnabled}
         type={'switch'}
-        onPress={() => setDisabledAutoplay(!disabledAutoplay)}
+        onPress={onToggleDisabledAutoplay}
       />
       <SectionTitle title={'Location Settings'} />
       <Text style={styles.smallText}>{'Selected Market: National'}</Text>
@@ -65,9 +92,9 @@ export const SettingsScreen = () => {
       <SectionTitle title={'Notification Settings'} />
       <Setting
         title={'All Notifications'}
-        value={allNotifications}
+        value={allNotificationsEnabled}
         type={'switch'}
-        onPress={() => setAllNotifications(!allNotifications)}
+        onPress={onToggleAllNotifications}
       />
       <Setting
         title={'Favorite Station Notifications'}
@@ -81,7 +108,7 @@ export const SettingsScreen = () => {
         title={'Download Using Cellular Data'}
         value={useCellularData}
         type={'switch'}
-        onPress={() => setUseCellularData(!useCellularData)}
+        onPress={onToggleUseCellularData}
       />
       <Text style={{ color: colors.white, fontSize: 13 }}>
         {'Recommended setting: Off'}
@@ -97,9 +124,9 @@ export const SettingsScreen = () => {
       />
       <Setting
         title={'Auto-download Episodes'}
-        value={autoDownload}
+        value={autoDownloadEpisodes}
         type={'switch'}
-        onPress={() => setAutoDownload(!autoDownload)}
+        onPress={onToggleAutoDownload}
         noTopBorder
       />
       <Setting
@@ -118,9 +145,9 @@ export const SettingsScreen = () => {
       />
       <Setting
         title={'Delete Played Episodes'}
-        value={deletePlayed}
+        value={deletePlayedEpisodes}
         type={'switch'}
-        onPress={() => setDeletePlayed(!deletePlayed)}
+        onPress={onToggleDeletePlayedEpisodes}
         noTopBorder
       />
       <SectionTitle title={'Other Settings'} />
